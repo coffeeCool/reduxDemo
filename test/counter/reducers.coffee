@@ -1,11 +1,9 @@
-dd = require 'ddeyes'
+import dd from 'ddeyes'
+import { createStore } from 'cfx.redux'
+import CounterApp from '../../src/counter/index.coffee'
+{ reducers } = CounterApp
 
-{ createStore } = require 'cfx.redux'
-
-CounterApp = (require '../src/index.coffee').default
-{ reducers }  = CounterApp
-
-taskConf = require './testConf'
+import taskConf from  './testConf'
 
 module.exports = (t) ->
 

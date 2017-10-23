@@ -1,21 +1,16 @@
-#!/usr/bin/env coffee
-test = require 'tape'
-require 'shelljs/make'
-require 'coffee-require/register'
-dd = require 'ddeyes'
+import test from 'tape'
+import 'shelljs/make'
+
+import dd from 'ddeyes'
 
 # 引入同步的constants
-constants = (
-  require '../src/constants/index.coffee'
-).default
+import constants from '../../src/counter/constants'
 
 # 引入actions
-actions = (
-  require '../src/actions/index.coffee'
-).default
+import actions from '../../src/counter/actions'
 
 # 引入reducers
-reducers = require './reducers'
+import reducers from './reducers'
 
 # 组合测试
 target.all = ->
@@ -23,7 +18,7 @@ target.all = ->
   target.constants()
   target.actions()
   target.reducers()
-  dd 'end'
+  
   
 # 测试constants
 target.constants = -> 
@@ -33,14 +28,9 @@ target.constants = ->
 target.actions = ->
   for k, v of actions
     dd k
-    dd v 1
+    dd v 
 
 # 测试reducers
 target.reducers = ->
   test 'Sync Reducers Test'
   , reducers
-
-
-
-
-  
