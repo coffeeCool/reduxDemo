@@ -32,11 +32,14 @@
     "tape": "^4.6.3"
   },
   "dependencies": {
+    "axios": "^0.17.0",
     "cfx.redux": "git+https://github.com/react-cfx/cfx.redux.git",
     "cfx.redux-actions": "git+https://github.com/react-cfx/cfx.redux-actions.git",
     "cfx.redux-saga": "git+https://github.com/react-cfx/cfx.redux-saga.git",
     "cfx.redux-types": "git+https://github.com/react-cfx/cfx.redux-types.git",
     "coffee-require": "^0.0.3",
+    "json-server": "^0.12.0",
+    "node-fetch": "^1.7.3",
     "redux-on-state-change": "^1.0.0"
   }
 }
