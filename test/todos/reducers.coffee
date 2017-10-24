@@ -5,7 +5,7 @@ import App from '../../src/todos/index.coffee'
 
 import todosConf from  './todosConf'
 
-module.exports = (t) ->
+module.exports = ->
 
   store = createStore
     App: reducers
@@ -20,5 +20,3 @@ module.exports = (t) ->
     store.dispatch task
 
   unsubscribe()
-
-  t.end()

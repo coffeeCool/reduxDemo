@@ -13,7 +13,6 @@ todos = handleActions
     dd 'LOAD_TODO'
     state
     []
-    
 
   ADD_TODO: (state, action) ->
     dd '进行ADD_TODO'

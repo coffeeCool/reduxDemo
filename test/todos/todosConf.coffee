@@ -12,9 +12,14 @@ import dd from 'ddeyes'
 
   
 module.exports = [
-  loadTodo()
-  addTodo name:'zhangsan', location:'wuhan', age: 24
-  modifyTodo 'wangwu'
   removeTodo()
-
+  addTodo
+    name:'zhangsan'
+    location:'wuhan'
+    age: 24
+  modifyTodo
+    name: 'zhangsan'
+  , 'wangwu' 
+  # , true # isGlobal
+  removeTodo()
 ]

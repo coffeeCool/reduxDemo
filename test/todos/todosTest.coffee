@@ -2,13 +2,13 @@ import 'shelljs/make'
 import dd from 'ddeyes'
 import test from 'tape'
 
-# 引入同步的constants
+# 引入同步的 constants
 import constants from '../../src/todos/constants'
 
-# 引入actions
+# 引入 actions
 import actions from '../../src/todos/actions'
 
-# 引入reducers
+# 引入 reducers
 import reducers from './reducers'
 
 # 组合测试
@@ -17,8 +17,7 @@ target.all = ->
   target.constants()
   target.actions()
   target.reducers()
-  
-  
+
 # 测试constants
 target.constants = -> 
   dd constants
@@ -31,5 +30,4 @@ target.actions = ->
 
 # 测试reducers
 target.reducers = ->
-  test 'Reducers测试'
-  , reducers
+  reducers()
