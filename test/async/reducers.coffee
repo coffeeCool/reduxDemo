@@ -6,6 +6,7 @@ import { SagaMiddleware } from 'cfx.redux-saga'
 import actions from '../../src/async/actions'
 import reducers from '../../src/async/reducers'
 import sagas from '../../src/async/sagas'
+import todoApp from '../../src/async/index'
 
 module.exports = ->
 
@@ -16,12 +17,21 @@ module.exports = ->
   , [
     SagaMW.getMidleware()
   ]
-
+  
   SagaMW.runSagas sagas
 
-  # store.dispatch actions.getTodoFe()
-  store.dispatch actions.addTodoBe
-    name: 'zhansan'
-    location: 'beijing'
+  
+  unsubscribe = store.subscribe ->
+    state = store.getState()
+    dd state
 
-  # dd store.getState()
+  store.dispatch actions.mirTodoFe()
+  store.dispatch actions.addTodoFe
+    name: 'lll'
+    location: 'go'
+  store.dispatch actions.updTodoFe(1)
+  store.dispatch actions.delTodoFe(1)
+
+  unsubscribe()
+
+

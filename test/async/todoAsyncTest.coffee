@@ -7,21 +7,32 @@ import actions from '../../src/async/actions'
 import {
   getUsers
   addUser
+  updateUser
+  deleteUser
 } from '../../src/async/service'
 import reducers from './reducers'
 
-# 组合测试
 target.all = ->
-  # dd constants
   reducers()
 
 target.service = ->
-
   addUser
     name: 'zhangsan',
     location: 'beijing'
   .then (data) ->
-    dd data
     getUsers()
     .then (data) ->
-      dd data
+      # dd '获取添加后的User'
+      # dd data
+      updateUser(data[0].id)
+      .then (data) ->
+        getUsers()
+        .then (data) ->
+          # dd '获取更新后的User'
+          # dd data
+          deleteUser(data[0].id)
+          .then (data) ->
+            getUsers()
+            .then (data) ->
+              # dd '删除后的User'
+              # dd data
