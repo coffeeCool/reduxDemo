@@ -14,6 +14,7 @@ import {
 
 {
   MIR_TODO_FE
+  MIR_TODO_FE_SUCCESS
   ADD_TODO_FE
   UPD_TODO_FE
   DEL_TODO_FE
@@ -30,6 +31,19 @@ Async =
       throw new Error ex
 
     return unless todos
+
+    newAction = {
+      action...
+      payload: {
+        action.payload...
+        todos
+      }
+    }
+
+    # dd newAction
+
+    yield dispatch newAction
+    , MIR_TODO_FE_SUCCESS
 
     return
 

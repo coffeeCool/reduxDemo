@@ -17,7 +17,7 @@ module.exports = [
     name:'zhangsan'
     location:'wuhan'
     age: 24
-  modifyTodo
+  modifyTodo 
     name: 'zhangsan'
   , 'wangwu' 
   # , true # isGlobal

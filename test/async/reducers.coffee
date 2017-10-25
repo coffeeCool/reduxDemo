@@ -8,6 +8,13 @@ import reducers from '../../src/async/reducers'
 import sagas from '../../src/async/sagas'
 import todoApp from '../../src/async/index'
 
+import {
+  getUsers
+  addUser
+  updateUser
+  deleteUser
+} from '../../src/async/service'
+
 module.exports = ->
 
   SagaMW = new SagaMiddleware()
@@ -20,18 +27,42 @@ module.exports = ->
   
   SagaMW.runSagas sagas
 
+  # 返回user list集合
+  listTodos = =>
+    store.dispatch actions.mirTodoFe()
+    users = await getUsers()
+    dd
+      db: users
+      store: store.getState()
+
+  # 返回新增的 user
+  addTodos = =>
+    store.dispatch actions.addTodoFe
+      name: 'helloWorld'
+      location: 'world'
+    users = await getUsers()
+    dd
+      db: users[users.length-1]
+      store: store.getState()
   
-  unsubscribe = store.subscribe ->
-    state = store.getState()
-    dd state
+  # 返回更新的 user
+  updateTodos = (id) =>
+    store.dispatch actions.updTodoFe 2
+    users = await getUsers()
+    dd 
+      db: users[0]
+      store: store.getState()
+    
+  # 返回删除后的 user
+  deleteTodos = (id) =>
+    store.dispatch actions.delTodoFe 2
+    users = await getUsers()
+    dd 
+      db: users
+      store: store.getState()
 
-  store.dispatch actions.mirTodoFe()
-  store.dispatch actions.addTodoFe
-    name: 'lll'
-    location: 'go'
-  store.dispatch actions.updTodoFe(1)
-  store.dispatch actions.delTodoFe(1)
-
-  unsubscribe()
-
+  # listTodos()
+  # addTodos()
+  updateTodos()
+  # deleteTodos()
 

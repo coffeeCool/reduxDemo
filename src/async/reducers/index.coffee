@@ -6,6 +6,7 @@ import dd from 'ddeyes'
 
 {
   MIR_TODO_FE
+  MIR_TODO_FE_SUCCESS
   ADD_TODO_FE
   UPD_TODO_FE
   DEL_TODO_FE
@@ -16,9 +17,11 @@ initialState =
 
 todos = handleActions
 
-  MIR_TODO_FE: (state, action) ->
+  MIR_TODO_FE_SUCCESS: (state, action) ->
     dd '进行MIR_TODO_FE操作'
-    state
+    [
+      action.payload.todos...
+    ]
     
 
   ADD_TODO_FE: (state, action) ->
@@ -30,22 +33,9 @@ todos = handleActions
   
   UPD_TODO_FE: (state, action) ->
     dd '进行UPD_TODO_FE操作'
-    state.reduce (r, c) ->
-      unless c.name is 'lll'
-        [
-          r...
-          c
-        ]
-      else
-        n = {
-          c...
-          name: action.payload.name
-        }
-        [
-          r...
-          n
-        ]
-    , []
+    dd state
+    dd action
+    
     
   DEL_TODO_FE: (state, action) ->
     dd '进行DEL_TODO_FE操作'

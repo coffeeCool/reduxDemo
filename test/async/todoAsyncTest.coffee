@@ -16,23 +16,24 @@ target.all = ->
   reducers()
 
 target.service = ->
-  addUser
+
+  newUser = await addUser
     name: 'zhangsan',
     location: 'beijing'
-  .then (data) ->
-    getUsers()
-    .then (data) ->
-      # dd '获取添加后的User'
-      # dd data
-      updateUser(data[0].id)
-      .then (data) ->
-        getUsers()
-        .then (data) ->
-          # dd '获取更新后的User'
-          # dd data
-          deleteUser(data[0].id)
-          .then (data) ->
-            getUsers()
-            .then (data) ->
-              # dd '删除后的User'
-              # dd data
+
+  users = await getUsers()
+
+  dd users
+
+  user = await updateUser newUser.id
+
+  users = await getUsers()
+
+  dd users
+
+  users.map (user) ->
+    await deleteUser user.id
+
+  users = await getUsers()
+
+  dd users

@@ -32,9 +32,6 @@ todos = handleActions
         ]
       else
         n = {
-          # (
-          #   unImmutable c.user
-          # )...
           c...
           name: action.payload
         }

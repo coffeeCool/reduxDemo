@@ -7,6 +7,7 @@ export default toActionsTypes {
   'DEL_TODO_BE'
 
   'MIR_TODO_FE'
+  'MIR_TODO_FE_SUCCESS'
   'ADD_TODO_FE'
   'UPD_TODO_FE'
   'DEL_TODO_FE'
