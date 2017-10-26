@@ -10,22 +10,23 @@ import {
   getUsers
   updateUser
   deleteUser
+  deleteAll
 } from '../service'
 
-{
-  GET_TODO_BE
-  ADD_TODO_BE
-  UPD_TODO_BE
-  DEL_TODO_BE
+{ 
+  MIR_TODO_STORE_FROM_DB
+  DEL_TODO_STORE_AND_DB
+  ADD_TODO_TO_STORE
+  UPD_TODO_TO_STORE
 
-  MIR_TODO_FE
-  ADD_TODO_FE
-  UPD_TODO_FE
-  DEL_TODO_FE
+  GET_TODO_FROM_DB_TO_STORE
+  DEL_ALL_STORE_DB
+  ADD_TODO_TO_STORE_DB
+  UPD_TODO_STORE_FROM_DB
 } = constants.types
 
 Async =
-
+  # get user list
   fetch: (action) ->
     try
       todos = yield sagaEffects.call getUsers
@@ -40,10 +41,31 @@ Async =
         todos
       }
     }
+
     yield dispatch newAction
-    , GET_TODO_BE
+    , GET_TODO_FROM_DB_TO_STORE
     return
 
+  # deleteall
+  delete: (action) ->
+    try
+      newTodo = yield sagaEffects.call deleteAll
+      , action.payload
+    catch ex
+      throw new Error ex
+    return unless newTodo
+
+    newDeleteAction = {
+      action...
+      payload: {
+        newDeleteAction...
+      }
+    }
+
+    yield dispatch newDeleteAction
+    , DEL_ALL_STORE_DB
+
+  # add user to db
   create: (action) ->
     try
       newTodo = yield sagaEffects.call addUser
@@ -58,11 +80,15 @@ Async =
         newTodo...
       }
     }
+    
+    dd newCreateAction
+
     yield dispatch newCreateAction
-    , ADD_TODO_FE
+    , ADD_TODO_TO_STORE_DB
 
     return
 
+  # update user return user list
   update: (action) ->
     try
       newTodo = yield sagaEffects.call updateUser
@@ -70,46 +96,31 @@ Async =
     catch ex
       throw new Error ex
     return unless newTodo
-
+    dd newTodo
+    dd action
     newUpdateAction = {
       action...
       payload: {
         newTodo...
       }
     }
+    dd newUpdateAction
     yield dispatch newUpdateAction
-    , UPD_TODO_FE
+    , UPD_TODO_STORE_FROM_DB
 
     return
 
-  delete: (action) ->
-    try
-      newTodo = yield sagaEffects.call deleteUser
-      , action.payload
-    catch ex
-      throw new Error ex
-    return unless newTodo
-
-    newDeleteAction = {
-      action...
-      payload: {
-        newDeleteAction...
-      }
-    }
-    yield dispatch newDeleteAction
-    , DEL_TODO_FE
-
 export default [
   ->
-    yield sagaEffects.takeLatest MIR_TODO_FE
+    yield sagaEffects.takeLatest MIR_TODO_STORE_FROM_DB
     , Async.fetch
   ->
-    yield sagaEffects.takeLatest ADD_TODO_BE
+    yield sagaEffects.takeLatest DEL_TODO_STORE_AND_DB
+    , Async.delete
+  ->
+    yield sagaEffects.takeLatest ADD_TODO_TO_STORE
     , Async.create
   ->
-    yield sagaEffects.takeLatest UPD_TODO_BE
+    yield sagaEffects.takeLatest UPD_TODO_TO_STORE
     , Async.update
-  ->
-    yield sagaEffects.takeLatest DEL_TODO_BE
-    , Async.delete
 ]

@@ -9,6 +9,7 @@ import {
   addUser
   updateUser
   deleteUser
+  deleteAll
 } from '../../src/async/service'
 import reducers from './reducers'
 
@@ -17,23 +18,23 @@ target.all = ->
 
 target.service = ->
 
-  newUser = await addUser
-    name: 'zhangsan',
-    location: 'beijing'
+  # newUser = await addUser
+  #   name: 'zhangsan',
+  #   location: 'beijing'
+
+  # users = await getUsers()
+
+  # dd users
+  await deleteAll()
+  
+  # user = await updateUser newUser.id
+
+  # users = await getUsers()
+
+  # dd users 
+  # users.map (user) ->
+  #   await deleteUser user.id
 
   users = await getUsers()
 
-  dd users
-
-  user = await updateUser newUser.id
-
-  users = await getUsers()
-
-  dd users
-
-  users.map (user) ->
-    await deleteUser user.id
-
-  users = await getUsers()
-
-  dd users
+  # dd users

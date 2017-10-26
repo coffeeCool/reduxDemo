@@ -11,6 +11,8 @@ import {
   addUser
   updateUser
   deleteUser
+  dbTest
+  deleteAll
 } from '../../src/async/service'
 
 module.exports = ->
@@ -25,46 +27,46 @@ module.exports = ->
   
   SagaMW.runSagas sagas
 
-  # 返回user list集合
+  # user list
   listTodos = =>
-    store.dispatch actions.mirTodoFe()
+    store.dispatch actions.mirTodoStoreFromDb()
     users = await getUsers()
-    dd
-      db: users
-      store: store.getState()
+    dbTest(users, store.getState())
 
-  # 返回新增的 user
+  # deleteAll (store and db)
+  deleteTodos = =>
+    store.dispatch actions.delTodoStoreAndDb()
+    users = await getUsers()
+    dbTest(users, store.getState())
+
+  # add user return user list
   addTodos = =>
-    store.dispatch actions.addTodoBe
-      name: '张三'
-      location: '啦啦啦'
+    store.dispatch actions.mirTodoStoreFromDb() # 以后要删除
+    store.dispatch actions.addTodoToStore()
     users = await getUsers()
-    dd
-      db: users
-      store: store.getState()
-  
-  # 返回更新的 user
-  updateTodos = (id) =>
-    store.dispatch actions.updTodoBe id
-    users = await getUsers()
-    dd 
-      db: users[users.length-1]
-      store: store.getState()
-    
-  # 返回删除后的 user
-  deleteTodos = (id) =>
-    store.dispatch actions.delTodoBe 1
-    users = await getUsers()
-    dd 
-      db: users
-      store: store.getState()
+    dbTest(users, store.getState())
 
-  listTodos()
-  addTodos()
+  # update user return user list
+  updateTodos =  =>
+    # store.dispatch actions.mirTodoStoreFromDb() # 以后要删除
+    store.dispatch actions.updTodoToStore()
+    users = await getUsers()
+    dbTest(users, store.getState())
+
+
+  # 1. deleteAll
+
+  # 2. addTodo x 4
+
+  # 3. update x 2
+
+  # 4. removeAll store (only store)
+
+  # 5. mirror store (store && db)
+
+  # 6. deleteAll
+  # deleteTodos()
+  # listTodos()
+  # deleteTodos()
+  # addTodos()
   updateTodos()
-  deleteTodos()
-  # a = await listTodos()
-  # b = await addTodos()
-  # c = await updateTodos 1
-  # d = await deleteTodos b.id
-
