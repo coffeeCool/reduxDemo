@@ -18,5 +18,5 @@ module.exports = ->
 
   for task in todosConf
     store.dispatch task
-
+ 
   unsubscribe()

@@ -20,6 +20,5 @@ module.exports = [
   modifyTodo 
     name: 'zhangsan'
   , 'wangwu' 
-  # , true # isGlobal
   removeTodo()
 ]

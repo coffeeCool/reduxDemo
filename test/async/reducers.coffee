@@ -1,8 +1,6 @@
 import dd from 'ddeyes'
-
 import { createStore } from 'cfx.redux'
 import { SagaMiddleware } from 'cfx.redux-saga'
-
 import actions from '../../src/async/actions'
 import reducers from '../../src/async/reducers'
 import sagas from '../../src/async/sagas'
@@ -37,32 +35,36 @@ module.exports = ->
 
   # 返回新增的 user
   addTodos = =>
-    store.dispatch actions.addTodoFe
-      name: 'helloWorld'
-      location: 'world'
+    store.dispatch actions.addTodoBe
+      name: '张三'
+      location: '啦啦啦'
     users = await getUsers()
     dd
-      db: users[users.length-1]
+      db: users
       store: store.getState()
   
   # 返回更新的 user
   updateTodos = (id) =>
-    store.dispatch actions.updTodoFe 2
+    store.dispatch actions.updTodoBe id
     users = await getUsers()
     dd 
-      db: users[0]
+      db: users[users.length-1]
       store: store.getState()
     
   # 返回删除后的 user
   deleteTodos = (id) =>
-    store.dispatch actions.delTodoFe 2
+    store.dispatch actions.delTodoBe 1
     users = await getUsers()
     dd 
       db: users
       store: store.getState()
 
-  # listTodos()
-  # addTodos()
+  listTodos()
+  addTodos()
   updateTodos()
-  # deleteTodos()
+  deleteTodos()
+  # a = await listTodos()
+  # b = await addTodos()
+  # c = await updateTodos 1
+  # d = await deleteTodos b.id
 

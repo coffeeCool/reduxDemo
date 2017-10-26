@@ -5,8 +5,7 @@ import constants from '../constants'
 import dd from 'ddeyes'
 
 {
-  MIR_TODO_FE
-  MIR_TODO_FE_SUCCESS
+  GET_TODO_BE
   ADD_TODO_FE
   UPD_TODO_FE
   DEL_TODO_FE
@@ -17,8 +16,8 @@ initialState =
 
 todos = handleActions
 
-  MIR_TODO_FE_SUCCESS: (state, action) ->
-    dd '进行MIR_TODO_FE操作'
+  GET_TODO_BE: (state, action) ->
+    dd '进行GET_TODO_BE操作'
     [
       action.payload.todos...
     ]
@@ -33,13 +32,13 @@ todos = handleActions
   
   UPD_TODO_FE: (state, action) ->
     dd '进行UPD_TODO_FE操作'
-    dd state
-    dd action
-    
-    
+    [
+      state...
+      action.payload
+    ]
+  
   DEL_TODO_FE: (state, action) ->
     dd '进行DEL_TODO_FE操作'
-    dd state
     []
     
 
