@@ -23,6 +23,8 @@ import {
   DEL_ALL_STORE_DB
   ADD_TODO_TO_STORE_DB
   UPD_TODO_STORE_FROM_DB
+
+  DEL_ALL_STORE
 } = constants.types
 
 Async =
@@ -96,17 +98,26 @@ Async =
     catch ex
       throw new Error ex
     return unless newTodo
-    dd newTodo
-    dd action
     newUpdateAction = {
       action...
       payload: {
-        newTodo...
+        newTodo
       }
     }
-    dd newUpdateAction
     yield dispatch newUpdateAction
     , UPD_TODO_STORE_FROM_DB
+
+    return
+
+  # remove all store
+  deleteAllStore: (action) ->
+    newUpdateAction = {
+      action...
+      payload: {
+      }
+    }
+    yield dispatch newUpdateAction
+    , DEL_ALL_STORE_DB
 
     return
 
@@ -123,4 +134,7 @@ export default [
   ->
     yield sagaEffects.takeLatest UPD_TODO_TO_STORE
     , Async.update
+  ->
+    yield sagaEffects.takeLatest DEL_ALL_STORE
+    , Async.deleteAllStore
 ]

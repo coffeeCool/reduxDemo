@@ -52,6 +52,12 @@ module.exports = ->
     store.dispatch actions.updTodoToStore()
     users = await getUsers()
     dbTest(users, store.getState())
+  
+  # delete all store
+  deleteAllStore =  =>
+    store.dispatch actions.delAllStore()
+    users = await getUsers()
+    dbTest(users, store.getState())
 
 
   # 1. deleteAll
@@ -66,7 +72,8 @@ module.exports = ->
 
   # 6. deleteAll
   # deleteTodos()
+  # deleteAllStore()
   # listTodos()
   # deleteTodos()
   # addTodos()
-  updateTodos()
+  # updateTodos()

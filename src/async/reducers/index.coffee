@@ -37,7 +37,7 @@ todos = handleActions
     dd '进行UPD_TODO_STORE_FROM_DB操作:::>>>'
     [
       state...
-      action.payload
+      action.payload.newTodo...
     ]
   
 , 0

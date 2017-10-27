@@ -11,7 +11,8 @@ export default toActionsTypes {
   'DEL_ALL_STORE_DB'
   'ADD_TODO_TO_STORE_DB'
   'UPD_TODO_STORE_FROM_DB'
-
+  
+  'DEL_ALL_STORE'
   # FE
   # 'MIR_TODO_FE' # mirror todos db to store // store.getState()
   # 'ADD_TODO_BE'
