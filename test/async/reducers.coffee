@@ -8,58 +8,61 @@ import todoApp from '../../src/async/index'
 
 import {
   getUsers
-  addUser
-  updateUser
-  deleteUser
   dbTest
-  deleteAll
+  sellp
 } from '../../src/async/service'
 
-module.exports = ->
+SagaMW = new SagaMiddleware()
 
-  SagaMW = new SagaMiddleware()
+store = createStore
+  todoApp: reducers
+, [
+  SagaMW.getMidleware()
+]
 
-  store = createStore
-    todoApp: reducers
-  , [
-    SagaMW.getMidleware()
-  ]
-  
-  SagaMW.runSagas sagas
+SagaMW.runSagas sagas
 
-  # user list
-  listTodos = =>
-    store.dispatch actions.mirTodoStoreFromDb()
+# user list
+listTodos = =>
+  store.dispatch actions.mirTodoStoreFromDb()
+  users = await getUsers()
+  dbTest users, store.getState()
+
+# deleteAll (store and db)
+deleteStAndDb = ()=>
+  store.dispatch actions.delTodoStoreAndDb()
+  start = do ->
+    await sellp 2000
     users = await getUsers()
-    dbTest(users, store.getState())
+    dbTest users, store.getState()
 
-  # deleteAll (store and db)
-  deleteTodos = =>
-    store.dispatch actions.delTodoStoreAndDb()
-    users = await getUsers()
-    dbTest(users, store.getState())
+# add user return user list
+addTodos = =>
+  store.dispatch actions.mirTodoStoreFromDb() # 以后要删除
+  store.dispatch actions.addTodoToStore()
+  users = await getUsers()
+  dbTest users, store.getState()
 
-  # add user return user list
-  addTodos = =>
-    store.dispatch actions.mirTodoStoreFromDb() # 以后要删除
-    store.dispatch actions.addTodoToStore()
-    users = await getUsers()
-    dbTest(users, store.getState())
+# update user return user list
+updateTodos =  =>
+  store.dispatch actions.mirTodoStoreFromDb() # 以后要删除
+  store.dispatch actions.updTodoToStore()
+  users = await getUsers()
+  dbTest users, store.getState()
 
-  # update user return user list
-  updateTodos =  =>
-    # store.dispatch actions.mirTodoStoreFromDb() # 以后要删除
-    store.dispatch actions.updTodoToStore()
-    users = await getUsers()
-    dbTest(users, store.getState())
-  
-  # delete all store
-  deleteAllStore =  =>
-    store.dispatch actions.delAllStore()
-    users = await getUsers()
-    dbTest(users, store.getState())
+# delete all store
+deleteAllStore =  =>
+  store.dispatch actions.delAllStore()
+  users = await getUsers()
+  dbTest users, store.getState()
 
-
+export {
+  listTodos
+  deleteStAndDb
+  addTodos
+  updateTodos
+  deleteAllStore
+}
   # 1. deleteAll
 
   # 2. addTodo x 4
@@ -71,9 +74,4 @@ module.exports = ->
   # 5. mirror store (store && db)
 
   # 6. deleteAll
-  # deleteTodos()
-  # deleteAllStore()
-  # listTodos()
-  # deleteTodos()
-  # addTodos()
-  # updateTodos()
+  

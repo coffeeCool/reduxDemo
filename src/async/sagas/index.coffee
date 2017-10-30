@@ -82,8 +82,6 @@ Async =
         newTodo...
       }
     }
-    
-    dd newCreateAction
 
     yield dispatch newCreateAction
     , ADD_TODO_TO_STORE_DB
@@ -104,6 +102,7 @@ Async =
         newTodo
       }
     }
+    
     yield dispatch newUpdateAction
     , UPD_TODO_STORE_FROM_DB
 

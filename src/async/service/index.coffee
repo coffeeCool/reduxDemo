@@ -91,6 +91,12 @@ deleteAll =  ->
     for id in ids
       await deleteUser id
 
+sellp = (time) ->
+  return new Promise (resolve, ms)->
+    setTimeout ->
+      resolve()
+    , time
+
 
 export {
   getUsers
@@ -99,4 +105,5 @@ export {
   deleteUser
   dbTest
   deleteAll
+  sellp
 }
