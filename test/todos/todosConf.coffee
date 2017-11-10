@@ -18,7 +18,6 @@ module.exports = [
     location:'wuhan'
     age: 24
   modifyTodo 
-    name: 'zhangsan'
-  , 'wangwu' 
+    name: 'wuhang'
   removeTodo()
 ]

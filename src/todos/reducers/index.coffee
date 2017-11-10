@@ -23,7 +23,7 @@ todos = handleActions
        
   MODIFY_TODO: (state, action) ->
     dd '正在执行MODIFY_TODO操作'
-    dd state
+    dd action
     state.reduce (r, c) ->
       unless c.name is 'zhangsan'
         [

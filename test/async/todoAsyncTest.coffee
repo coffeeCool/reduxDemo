@@ -24,25 +24,11 @@ import {
 target.all = ->
   target.deleteStAndDb()
   target.addTodos()
-  # await sellp 2500
-  # target.updateTodos()
-  # await sellp 2500
-  # target.deleteAllStore()
-  # await sellp 2500
-  # target.listTodos()
-  # await sellp 2500
-  # target.deleteStAndDb()
-
   # 1. deleteAll
-
   # 2. addTodo x 4
-
   # 3. update x 2
-
   # 4. removeAll store (only store)
-
   # 5. mirror store (store && db)
-
   # 6. deleteAll
 
 target.deleteStAndDb = ->
@@ -81,5 +67,3 @@ target.service = ->
   #   await deleteUser user.id
 
   users = await getUsers()
-
-  # dd users

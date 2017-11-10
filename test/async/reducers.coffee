@@ -63,15 +63,5 @@ export {
   updateTodos
   deleteAllStore
 }
-  # 1. deleteAll
-
-  # 2. addTodo x 4
-
-  # 3. update x 2
-
-  # 4. removeAll store (only store)
-
-  # 5. mirror store (store && db)
-
-  # 6. deleteAll
+  
   

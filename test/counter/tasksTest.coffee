@@ -28,7 +28,7 @@ target.constants = ->
 target.actions = ->
   for k, v of actions
     dd k
-    dd v 
+    dd v 1
 
 # 测试reducers
 target.reducers = ->
